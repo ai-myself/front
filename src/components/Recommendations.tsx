@@ -47,55 +47,55 @@ const Recommendations = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            관상 분석 결과
-          </h1>
-          <p className="text-gray-600">당신에게 맞는 활동을 추천해드려요!</p>
+    <div className="h-screen bg-gradient-to-br from-orange-50 to-red-100 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-auto overflow-y-scroll max-h-[90vh]">
+        <div className="text-center mb-6">
+          <h2 className="font-bold text-gray-800 mb-2">관상 분석 결과</h2>
+          <p className="text-sm text-gray-600">
+            당신에게 맞는 활동을 추천해드려요!
+          </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* 셀카와 성격 타입 */}
-          <div className="flex items-center space-x-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6">
+          <div className="flex items-center space-x-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4">
             <div className="relative">
               <img
                 src={selfieUrl}
                 alt="셀카"
-                className="w-20 h-20 object-cover rounded-full border-4 border-white shadow-lg"
+                className="w-16 h-16 object-cover rounded-full border-4 border-white shadow-lg"
               />
-              <div className="absolute -bottom-1 -right-1 bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">
+              <div className="absolute -bottom-1 -right-1 bg-purple-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                 {getPersonalityEmoji(personalityType)}
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="text-xl font-semibold text-gray-800 mb-1">
+              <h2 className="text-lg font-semibold text-gray-800 mb-1">
                 {personalityType}
               </h2>
-              <p className="text-gray-600 text-sm">
+              <p className="text-xs text-gray-600">
                 {getPersonalityDescription(personalityType)}
               </p>
             </div>
           </div>
 
           {/* 추천 활동들 */}
-          <div className="bg-gray-50 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+          <div className="bg-gray-50 rounded-lg p-4">
+            <h3 className="text-base font-semibold text-gray-800 mb-3">
               🎯 당신에게 추천하는 활동
             </h3>
-            <div className="grid gap-3">
+            <div className="grid gap-2">
               {recommendations.map((recommendation, index) => (
                 <div
                   // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                   key={index}
-                  className="bg-white rounded-lg p-4 border-l-4 border-orange-500 shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white rounded-lg p-3 border-l-4 border-orange-500 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-semibold text-sm">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-semibold text-xs">
                       {index + 1}
                     </div>
-                    <span className="font-medium text-gray-800">
+                    <span className="font-medium text-gray-800 text-sm">
                       {recommendation}
                     </span>
                   </div>
@@ -105,9 +105,11 @@ const Recommendations = () => {
           </div>
 
           {/* 추가 정보 */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 className="font-semibold text-blue-800 mb-2">💡 추천 이유</h4>
-            <p className="text-blue-700 text-sm">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+            <h4 className="font-semibold text-blue-800 mb-1 text-sm">
+              💡 추천 이유
+            </h4>
+            <p className="text-xs text-blue-700">
               당신의 성격과 관상을 분석한 결과, 위의 활동들이 가장 잘 맞을 것
               같아요. 새로운 경험을 통해 더욱 즐거운 여행이 될 거예요!
             </p>
@@ -116,7 +118,7 @@ const Recommendations = () => {
           {/* 홈으로 돌아가기 버튼 */}
           <button
             onClick={handleBackToHome}
-            className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-6 rounded-lg font-medium hover:from-orange-600 hover:to-red-600 transition-all shadow-lg hover:shadow-xl"
+            className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition-all shadow-lg hover:shadow-xl text-sm"
           >
             🏠 홈으로 돌아가기
           </button>

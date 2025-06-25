@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const PhotoUpload = () => {
@@ -6,6 +6,7 @@ const PhotoUpload = () => {
   const [previewUrl, setPreviewUrl] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const imageUploadId = useId();
 
   const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -38,32 +39,31 @@ const PhotoUpload = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            여행 AI 어시스턴트
-          </h1>
-          <p className="text-gray-600">
+    <div className="h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full mx-auto">
+        <div className="text-center mb-6">
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">For in All</h1>
+          <p className="text-sm text-gray-600">
             풍경 사진을 업로드하면 관광지 정보를 알려드려요!
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* 이미지 업로드 영역 */}
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-400 transition-colors">
             <input
               type="file"
               accept="image/*"
               onChange={handleImageSelect}
               className="hidden"
+              id={imageUploadId}
             />
-            <label htmlFor="image-upload" className="cursor-pointer">
-              <div className="space-y-4">
-                <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+            <label htmlFor={imageUploadId} className="cursor-pointer">
+              <div className="space-y-3">
+                <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                   {/** biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
                   <svg
-                    className="w-8 h-8 text-blue-500"
+                    className="w-6 h-6 text-blue-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -77,12 +77,10 @@ const PhotoUpload = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-lg font-medium text-gray-700">
-                    사진을 선택하거나 드래그하세요
+                  <p className="text-base font-medium text-gray-700">
+                    사진을 선택하세요
                   </p>
-                  <p className="text-sm text-gray-500">
-                    JPG, PNG 파일을 지원합니다
-                  </p>
+                  <p className="text-xs text-gray-500">JPG, PNG 파일 지원</p>
                 </div>
               </div>
             </label>
@@ -90,20 +88,20 @@ const PhotoUpload = () => {
 
           {/* 미리보기 */}
           {previewUrl && (
-            <div className="space-y-4">
+            <div className="space-y-3">
               <img
                 src={previewUrl}
                 alt="미리보기"
-                className="w-full h-48 object-cover rounded-lg"
+                className="w-full h-40 object-cover rounded-lg"
               />
               <button
                 onClick={handleUpload}
                 disabled={isLoading}
-                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full bg-gradient-to-r text-white from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 py-3 px-4 rounded-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-xl text-base"
               >
                 {isLoading ? (
                   <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                     분석 중...
                   </div>
                 ) : (
