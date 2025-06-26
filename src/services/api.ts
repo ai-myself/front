@@ -14,7 +14,6 @@ export const analyzeLocationImage = async (imageFile: File, coords: { latitude:n
   try {
     const response = await fetch(`${API_BASE_URL}/tourism/search`, {
       method: "POST",
-      headers:{ 'content-type': 'multipart/form-data' },
       body: formData
     });
 
@@ -35,7 +34,6 @@ export const getRecommendations = async (imageFile: File, coords: { latitude:num
 
     const response = await fetch(`${API_BASE_URL}/tourism/recommend`, {
       method: "POST",
-      headers:{ 'content-type': 'multipart/form-data' },
       body: formData
     });
 
