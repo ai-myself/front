@@ -20,11 +20,10 @@ const PersonalityTest = () => {
 
   const handleAnalyze = async () => {
     if (!selectedImage) return;
-
     setIsLoading(true);
     try {
       const currnent = await getCurrentLocation();
-      const result = await getRecommendations(selectedImage,currnent.coords);
+      const result = await getRecommendations(selectedImage, currnent.coords);
       setIsLoading(false);
       navigate("/recommendations", {
         state: {

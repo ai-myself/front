@@ -85,7 +85,7 @@ const Recommendations = () => {
               🎯 당신에게 추천하는 활동
             </h3>
             <div className="grid gap-2">
-              {recommendations.map((recommendation, index) => (
+              {recommendations?.map((recommendation, index) => (
                 <div
                   // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                   key={index}

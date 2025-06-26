@@ -1,3 +1,5 @@
+import imageCompression from "browser-image-compression";
+
 // API 기본 설정
 const API_BASE_URL =
   'https://gd6haaci2nsqhwvahmf24sir6e0bcpcb.lambda-url.ap-northeast-2.on.aws/api'
@@ -5,7 +7,7 @@ const API_BASE_URL =
 // 이미지 업로드 및 관광지 분석 API
 export const analyzeLocationImage = async (imageFile: File, coords: { latitude:number; longitude:number; }) => {
   const formData = new FormData();
-  formData.append("image", imageFile);
+  formData.append("image", await imageCompression(imageFile, { maxSizeMB: 0.2, maxWidthOrHeight: 1920, useWebWorker: true }));
   formData.append("latitude", coords.latitude.toString());
   formData.append("longitude", coords.longitude.toString());
 
@@ -13,7 +15,7 @@ export const analyzeLocationImage = async (imageFile: File, coords: { latitude:n
     const response = await fetch(`${API_BASE_URL}/tourism/search`, {
       method: "POST",
       body: formData,
-    });  
+    });
 
     return await response.json() as { title: string; imageUrl: string; overview: string; }
   } catch (error) {
@@ -26,7 +28,7 @@ export const analyzeLocationImage = async (imageFile: File, coords: { latitude:n
 export const getRecommendations = async (imageFile: File, coords: { latitude:number; longitude:number; }) => {
   try {
     const formData = new FormData();
-    formData.append("image", imageFile);
+    formData.append("image",await imageCompression(imageFile, { maxSizeMB: 0.2, maxWidthOrHeight: 1920, useWebWorker: true }));
     formData.append("latitude", coords.latitude.toString());
     formData.append("longitude", coords.longitude.toString());
 

@@ -54,7 +54,7 @@ const LocationInfo = () => {
             </p>
 
             {/* 추가 정보 (실제 API에서 받아올 데이터) */}
-            <div className="mt-3 grid grid-cols-2 gap-3">
+            {/* <div className="mt-3 grid grid-cols-2 gap-3">
               <div className="bg-white rounded-lg p-2">
                 <div className="text-xs text-gray-500">주변 행사</div>
                 <div className="font-medium text-sm">봄꽃 축제</div>
@@ -63,7 +63,7 @@ const LocationInfo = () => {
                 <div className="text-xs text-gray-500">추천 시간</div>
                 <div className="font-medium text-sm">오후 3-5시</div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* 버튼들 */}
