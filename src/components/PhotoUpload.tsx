@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { analyzeLocationImage, getCurrentLocation } from "../services/api";
 
 const PhotoUpload = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -22,17 +23,17 @@ const PhotoUpload = () => {
 
     setIsLoading(true);
 
-    // 실제 구현에서는 여기에 이미지 업로드 API 호출
-    // 예시: await uploadImage(selectedImage);
+    const currnent = await getCurrentLocation();
+    const result = await analyzeLocationImage(selectedImage, currnent.coords);
 
     // 로딩 시뮬레이션
     setTimeout(() => {
       setIsLoading(false);
       navigate("/location-info", {
         state: {
-          imageUrl: previewUrl,
-          locationName: "예시 관광지",
-          description: "이곳은 아름다운 풍경을 자랑하는 관광지입니다.",
+          imageUrl: result.imageUrl,
+          locationName: result.title,
+          description: result.overview,
         },
       });
     }, 2000);

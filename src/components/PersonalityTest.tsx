@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getCurrentLocation, getRecommendations } from "../services/api";
 
 const PersonalityTest = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -22,22 +23,17 @@ const PersonalityTest = () => {
 
     setIsLoading(true);
 
-    // 실제 구현에서는 여기에 관상 분석 API 호출
-    // 예시: await analyzePersonality(selectedImage);
+    const currnent = await getCurrentLocation();
+    const result = await getRecommendations(selectedImage,currnent.coords);
 
     // 로딩 시뮬레이션
     setTimeout(() => {
       setIsLoading(false);
       navigate("/recommendations", {
         state: {
-          selfieUrl: previewUrl,
-          personalityType: "활발한 외향형",
-          recommendations: [
-            "카페 투어",
-            "스트리트 푸드 탐방",
-            "야시장 체험",
-            "로컬 마켓 방문",
-          ],
+          selfieUrl: URL.createObjectURL(selectedImage),
+          personalityType: result.travel_type,
+          recommendations: result.contents,
         },
       });
     }, 3000);
