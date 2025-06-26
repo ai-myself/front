@@ -22,21 +22,21 @@ const PhotoUpload = () => {
     if (!selectedImage) return;
 
     setIsLoading(true);
-
-    const currnent = await getCurrentLocation();
-    const result = await analyzeLocationImage(selectedImage, currnent.coords);
-
-    // 로딩 시뮬레이션
-    setTimeout(() => {
+    try {
+      const currnent = await getCurrentLocation();
+      const result = await analyzeLocationImage(selectedImage,currnent.coords);
       setIsLoading(false);
       navigate("/location-info", {
         state: {
-          imageUrl: result.imageUrl,
+          imageUrl: previewUrl,
           locationName: result.title,
           description: result.overview,
         },
       });
-    }, 2000);
+    } catch (error) {
+      setIsLoading(false);
+      alert((error as Error).message);
+    }
   };
 
   return (

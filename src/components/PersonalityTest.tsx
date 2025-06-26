@@ -22,12 +22,9 @@ const PersonalityTest = () => {
     if (!selectedImage) return;
 
     setIsLoading(true);
-
-    const currnent = await getCurrentLocation();
-    const result = await getRecommendations(selectedImage,currnent.coords);
-
-    // 로딩 시뮬레이션
-    setTimeout(() => {
+    try {
+      const currnent = await getCurrentLocation();
+      const result = await getRecommendations(selectedImage,currnent.coords);
       setIsLoading(false);
       navigate("/recommendations", {
         state: {
@@ -36,7 +33,10 @@ const PersonalityTest = () => {
           recommendations: result.contents,
         },
       });
-    }, 3000);
+    } catch (error) {
+      setIsLoading(false);
+      alert((error as Error).message);
+    }
   };
 
   return (
